@@ -1,0 +1,55 @@
+name: Lint Code
+
+on:
+  pull_request:
+    branches: ['*']
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Identify changed files
+        id: changed_files
+        run: |
+          CHANGED=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+          echo "modified_files=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Lint Dockerfiles
+        run: |
+          for file in ${{ steps.changed_files.outputs.modified_files }}; do
+            if [[ -f "$file" && "$(basename "$file")" == "Dockerfile" ]]; then
+              echo "Linting $file"
+              cat "$file" | docker run --rm -i hadolint/hadolint
+            fi
+          done
+
+      - name: Lint Shell scripts
+        run: |
+          for file in ${{ steps.changed_files.outputs.modified_files }}; do
+            if [[ "$file" == *.sh && -f "$file" ]]; then
+              echo "Linting $file"
+              docker run --rm -v "${{ github.workspace }}:/mnt" koalaman/shellcheck:stable "/mnt/$file"
+            fi
+          done
+
+      - name: Install Python linters
+        run: |
+          pip install flake8 pylint
+
+      - name: Lint Python scripts
+        run: |
+          for file in ${{ steps.changed_files.outputs.modified_files }}; do
+            if [[ "$file" == *.py && -f "$file" ]]; then
+              echo "Running flake8 for $file"
+              flake8 "$file" --max-line-length=120
+
+              echo "Running pylint for $file"
+              pylint "$file" --max-line-length=120 --disable="C0103,C0114,C0115"
+            fi
+          done
