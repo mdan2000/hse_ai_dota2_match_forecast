@@ -27,15 +27,7 @@ def lambda_handler(event, _context):
         if isinstance(body, str):
             body = json.loads(body)
 
-        normal_body = {
-            'input_body': 'Ok'
-        }
-        logger.info(json.dumps(normal_body))
     except Exception:  # pylint: disable=broad-exception-caught
-        error_buddy = {
-            'input_body': 'Error'
-        }
-        logger.info(json.dumps(error_buddy))
         return {
             'statusCode': 400,
             'body': json.dumps('Неверный формат тела запроса')
@@ -47,10 +39,19 @@ def lambda_handler(event, _context):
     file_name = body.get('model_name')
 
     if not file_name:
+        empty_model_name_log = {
+            'model_name_exists': False
+        }
+        logger.info(json.dumps(empty_model_name_log))
         return {
             'statusCode': 400,
             'body': json.dumps('Отсутствует необходимый параметр: model_name')
         }
+
+    exist_model_log = {
+        'model_name_exists': True
+    }
+    logger.info(json.dumps(exist_model_log))
 
     # Формируем ключ S3 (путь к файлу)
     s3_key = f"{directory}/{file_name}"
