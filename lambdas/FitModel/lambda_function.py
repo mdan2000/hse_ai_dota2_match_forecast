@@ -77,7 +77,7 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
                 }
 
             # Десериализуем модель, если требуется
-            model = pickle.loads(response['Body'].read())
+            model = pickle.loads(response['Body'].read())['pipeline']
 
         # Если параметр model_name отсутствует, создаём и обучаем новую модель
         else:
