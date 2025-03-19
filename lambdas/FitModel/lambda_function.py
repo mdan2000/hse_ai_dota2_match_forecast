@@ -12,7 +12,7 @@ s3 = boto3.client('s3')
 BUCKET_NAME = "dmyachin-new-models"
 
 
-def lambda_handler(event, _context):
+def lambda_handler(event, _context):  # pylint: disable=too-many-return-statements
     """
     Лямбда-функция для работы с моделями:
 
