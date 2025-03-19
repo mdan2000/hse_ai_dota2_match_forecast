@@ -50,6 +50,7 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
         # Если передан параметр model_name, загружаем модель
         if "model_name" in event:
             model_name = event["model_name"]
+            new_model_name = model_name
             key = f"models/{model_name}.pkl"
             try:
                 response = s3.get_object(Bucket=BUCKET_NAME, Key=key)
