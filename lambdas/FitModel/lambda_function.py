@@ -74,7 +74,7 @@ def lambda_handler(event, context):
                 return {
                     "statusCode": 400,
                     "body": json.dumps(
-                    {"error": "Отсутствуют необходимые параметры new_model_name, model_params или model_type."})
+                        {"error": "Отсутствуют необходимые параметры new_model_name, model_params или model_type."})
                 }
 
             # Проверяем, что model_type корректный
