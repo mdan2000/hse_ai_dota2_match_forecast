@@ -75,6 +75,7 @@ def lambda_handler(event, _context):
         'model_name': model_name
     }
     logger.info(json.dumps(empty_model_name_log))
+
     # Записываем элемент в DynamoDB. В данном случае используется ключ 'id' с уникальным значением.
     try:
         table.update_item(
