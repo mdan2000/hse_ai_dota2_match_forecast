@@ -33,6 +33,17 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
        - Возвращает "OK".
     """
     try:
+        body = event.get('body')
+        # Если тело запроса представлено строкой, парсим его как JSON
+        if isinstance(body, str):
+            body = json.loads(body)
+    except Exception:  # pylint: disable=broad-exception-caught
+        return {
+            'statusCode': 400,
+            'body': json.dumps('Неверный формат тела запроса')
+        }
+
+    try:
         data_key = "data/small_df.csv"
         response = s3.get_object(Bucket=BUCKET_NAME, Key=data_key)
         df = pd.read_csv(response['Body'])
@@ -106,7 +117,7 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
         model_pickle = pickle.dumps(model)
 
         # Сохраняем модель в S3
-        dest_key = f"models/{new_model_name}"
+        dest_key = f"models/{new_model_name}.pkl"
         s3.put_object(Bucket=BUCKET_NAME, Key=dest_key, Body=model_pickle)
 
         return {
