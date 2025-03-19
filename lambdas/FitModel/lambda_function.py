@@ -114,7 +114,7 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
         model.fit(X, y)
 
         # Сериализуем модель в pickle
-        model_pickle = pickle.dumps(model)
+        model_pickle = pickle.dumps({'pipeline': model})
 
         # Сохраняем модель в S3
         dest_key = f"models/{new_model_name}.pkl"
