@@ -1,95 +1,114 @@
 import json
-import base64
+import pandas as pd
 import pickle
-from io import StringIO
+from sklearn.linear_model import LogisticRegression, SGDClassifier
 
 import boto3
-import pandas as pd
-
-# Инициализируем клиент S3
-s3_client = boto3.client('s3')
+from botocore.exceptions import ClientError
 
 
-def lambda_handler(event, _context):
+s3 = boto3.client('s3')
+BUCKET_NAME = "dmyachin-new-models"
+
+
+def lambda_handler(event, context):
     """
-    Ожидается, что event содержит следующие ключи:
-      - "pickle_file": base64-кодированная строка с pickle-моделью,
-      - "csv_data": base64-кодированная строка с CSV-данными,
-      - "params": словарь, содержащий:
-          - параметры для метода fit модели,
-          - "model_name": название модели,
-          - "s3_bucket": имя S3 bucket,
-          - "s3_key": путь (ключ) для сохранения модели в bucket.
+    Лямбда-функция для работы с моделями:
+    
+    1. Если в event передан параметр "model_name":
+       - Загружает из S3 объект по ключу "models/{model_name}".
+       - Если файла нет, возвращает ошибку.
+       - Если найден, возвращает сообщение об успешной загрузке.
+       
+    2. Если "model_name" отсутствует:
+       - Ожидает наличие параметров "new_model_name", "model_params" и "model_type".
+       - Параметр "model_type" может принимать значения "LogisticRegression" или "SGDClassifier".
+       - Загружает данные из S3 по пути "data/small_df.csv".
+         В данных целевая переменная должна быть в столбце "target",
+         а остальные столбцы используются как признаки.
+       - Создаёт модель соответствующего типа, передавая model_params в конструктор.
+       - Обучает модель (fit).
+       - Сериализует модель в pickle и сохраняет её в S3 по ключу "models/{new_model_name}".
+       - Возвращает "OK".
     """
-    try:  # pylint: disable=broad-exception-caught
-        # Извлечение входных данных
-        if 'body' in event:
-            event = json.loads(event['body'])
+    try:
+        data_key = "data/small_df.csv"
+        response = s3.get_object(Bucket=BUCKET_NAME, Key=data_key)
+        df = pd.read_csv(response['Body'])
 
-        # Извлечение входных данных
-        pickle_file_b64 = event.get('pickle_file')
-        csv_data_b64 = event.get('csv_data')
-        params = event.get('params', {})
-
-        if not pickle_file_b64 or not csv_data_b64:
+        # Проверяем наличие целевого столбца
+        if "target" not in df.columns:
             return {
-                'statusCode': 400,
-                'body': json.dumps({
-                    'error': 'Не переданы все необходимые файлы: pickle_file и csv_data'
-                })
+                "statusCode": 400,
+                "body": json.dumps({"error": "В данных отсутствует столбец 'target'."})
             }
+        
+        y = df["target"]
+        X = df.drop(columns=["target"])
 
-        # Получаем из params данные для S3 и название модели
-        model_name, s3_bucket, s3_key = (
-            params.get('model_name'),
-            params.get('s3_bucket'),
-            params.get('s3_key')
-        )
-        if not model_name or not s3_bucket or not s3_key:
-            return {
-                'statusCode': 400,
-                'body': json.dumps({
-                    'error': 'В params должны быть указаны model_name, s3_bucket и s3_key'
-                })
-            }
+            
+        # Если передан параметр model_name, загружаем модель
+        if "model_name" in event:
+            model_name = event["model_name"]
+            key = f"models/{model_name}.pkl"
+            try:
+                response = s3.get_object(Bucket=BUCKET_NAME, Key=key)
+            except ClientError as e:
+                if e.response['Error']['Code'] == "NoSuchKey":
+                    return {
+                        "statusCode": 404,
+                        "body": json.dumps({"error": f"Файл с именем {model_name} не найден."})
+                    }
+                else:
+                    raise
 
-        # Декодирование и загрузка данных
-        model = pickle.loads(base64.b64decode(pickle_file_b64))
-        df = pd.read_csv(StringIO(base64.b64decode(csv_data_b64).decode('utf-8')))
-        if 'target' not in df.columns:
-            return {
-                'statusCode': 400,
-                'body': json.dumps({'error': 'В CSV не найден столбец "target".'})
-            }
+            # Десериализуем модель, если требуется
+            model = pickle.loads(response['Body'].read())
 
-        # Подготовка данных: X - признаки, y - целевая переменная
-        y = df['target']
-        X = df.drop(columns=['target'])
+        # Если параметр model_name отсутствует, создаём и обучаем новую модель
+        else:
+            new_model_name = event.get("new_model_name")
+            model_params = event.get("model_params", {})
+            model_type = event.get("model_type")
 
-        # Обучение модели с дополнительными параметрами (если они переданы)
-        print('Before try to fit')
+            if not new_model_name or not model_params or not model_type:
+                return {
+                    "statusCode": 400,
+                    "body": json.dumps({"error": "Отсутствуют необходимые параметры new_model_name, model_params или model_type."})
+                }
+
+            # Проверяем, что model_type корректный
+            if model_type not in ["LogisticRegression", "SGDClassifier"]:
+                return {
+                    "statusCode": 400,
+                    "body": json.dumps({"error": "model_type должен быть LogisticRegression или SGDClassifier."})
+                }
+
+            # Загружаем данные для обучения
+            
+
+            # Создаем модель в зависимости от model_type
+            if model_type == "LogisticRegression":
+                model = LogisticRegression(**model_params)
+            elif model_type == "SGDClassifier":
+                model = SGDClassifier(**model_params)
+
+            # Обучаем модель
         model.fit(X, y)
 
-        # Сериализация обученной модели и сохранение в S3
-        print('fitted')
-        fitted_model_pickle = pickle.dumps(model)
-        print('puckled model')
-        fitted_model_b64 = base64.b64encode(fitted_model_pickle).decode('utf-8')
-        print('encode fitted model')
-        s3_client.put_object(Bucket=s3_bucket, Key=s3_key, Body=fitted_model_pickle)
-        print('Okay object saved')
+        # Сериализуем модель в pickle
+        model_pickle = pickle.dumps(model)
+
+        # Сохраняем модель в S3
+        dest_key = f"models/{new_model_name}"
+        s3.put_object(Bucket=BUCKET_NAME, Key=dest_key, Body=model_pickle)
+
         return {
-            'statusCode': 200,
-            'body': json.dumps({
-                'message': 'Модель успешно обучена и сохранена в S3',
-                'model_name': model_name,
-                's3_bucket': s3_bucket,
-                's3_key': s3_key,
-                'fitted_model': fitted_model_b64
-            })
+            "statusCode": 200,
+            "body": json.dumps({"message": "OK"})
         }
     except Exception as e:  # pylint: disable=broad-exception-caught
         return {
-            'statusCode': 500,
-            'body': json.dumps({'error': str(e)})
+            "statusCode": 500,
+            "body": json.dumps({"error": str(e)})
         }
