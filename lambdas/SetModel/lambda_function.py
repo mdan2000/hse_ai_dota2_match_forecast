@@ -39,19 +39,10 @@ def lambda_handler(event, _context):
     file_name = body.get('model_name')
 
     if not file_name:
-        empty_model_name_log = {
-            'model_name_exists': False
-        }
-        logger.info(json.dumps(empty_model_name_log))
         return {
             'statusCode': 400,
             'body': json.dumps('Отсутствует необходимый параметр: model_name')
         }
-
-    exist_model_log = {
-        'model_name_exists': True
-    }
-    logger.info(json.dumps(exist_model_log))
 
     # Формируем ключ S3 (путь к файлу)
     s3_key = f"{directory}/{file_name}"
@@ -61,6 +52,10 @@ def lambda_handler(event, _context):
         response = s3_client.list_objects_v2(Bucket=bucket, Prefix=s3_key, MaxKeys=1)
         # Если в ответе отсутствует ключ 'Contents', файл не найден
         if 'Contents' not in response:
+            empty_model_name_log = {
+                'model_name_exists': False
+            }
+            logger.info(json.dumps(empty_model_name_log))
             return {
                 'statusCode': 404,
                 'body': json.dumps('Файл не найден')
@@ -73,6 +68,11 @@ def lambda_handler(event, _context):
 
     # Если файл найден, устанавливаем значение для записи в DynamoDB (например, имя файла)
     dynamodb_value = file_name
+    empty_model_name_log = {
+        'model_name_exists': True,
+        'model_name': file_name
+    }
+    logger.info(json.dumps(empty_model_name_log))
 
     # Записываем элемент в DynamoDB. В данном случае используется ключ 'id' с уникальным значением.
     try:
