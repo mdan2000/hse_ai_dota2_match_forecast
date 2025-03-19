@@ -47,11 +47,11 @@ def lambda_handler(event, _context):
             'statusCode': 400,
             'body': json.dumps('Отсутствует необходимый параметр: model_name')
         }
-    else:
-        exist_model_log = {
-            'model_name_exists': True
-        }
-        logger.info(json.dumps(exist_model_log))
+
+    exist_model_log = {
+        'model_name_exists': True
+    }
+    logger.info(json.dumps(exist_model_log))
 
     # Формируем ключ S3 (путь к файлу)
     s3_key = f"{directory}/{file_name}"
