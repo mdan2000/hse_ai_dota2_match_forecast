@@ -14,12 +14,12 @@ BUCKET_NAME = "dmyachin-new-models"
 def lambda_handler(event, context):
     """
     Лямбда-функция для работы с моделями:
-    
+
     1. Если в event передан параметр "model_name":
        - Загружает из S3 объект по ключу "models/{model_name}".
        - Если файла нет, возвращает ошибку.
        - Если найден, возвращает сообщение об успешной загрузке.
-       
+
     2. Если "model_name" отсутствует:
        - Ожидает наличие параметров "new_model_name", "model_params" и "model_type".
        - Параметр "model_type" может принимать значения "LogisticRegression" или "SGDClassifier".
@@ -42,11 +42,10 @@ def lambda_handler(event, context):
                 "statusCode": 400,
                 "body": json.dumps({"error": "В данных отсутствует столбец 'target'."})
             }
-        
+
         y = df["target"]
         X = df.drop(columns=["target"])
 
-            
         # Если передан параметр model_name, загружаем модель
         if "model_name" in event:
             model_name = event["model_name"]
@@ -74,7 +73,8 @@ def lambda_handler(event, context):
             if not new_model_name or not model_params or not model_type:
                 return {
                     "statusCode": 400,
-                    "body": json.dumps({"error": "Отсутствуют необходимые параметры new_model_name, model_params или model_type."})
+                    "body": json.dumps(
+                    {"error": "Отсутствуют необходимые параметры new_model_name, model_params или model_type."})
                 }
 
             # Проверяем, что model_type корректный
@@ -83,9 +83,6 @@ def lambda_handler(event, context):
                     "statusCode": 400,
                     "body": json.dumps({"error": "model_type должен быть LogisticRegression или SGDClassifier."})
                 }
-
-            # Загружаем данные для обучения
-            
 
             # Создаем модель в зависимости от model_type
             if model_type == "LogisticRegression":
