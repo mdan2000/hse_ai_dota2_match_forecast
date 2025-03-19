@@ -70,7 +70,7 @@ def lambda_handler(event, _context):
     dynamodb_value = file_name
     empty_model_name_log = {
         'model_name_exists': True,
-        'model_name': model_name
+        'model_name': file_name
     }
     logger.info(json.dumps(empty_model_name_log))
 
