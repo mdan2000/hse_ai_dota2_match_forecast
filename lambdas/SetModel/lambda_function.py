@@ -1,4 +1,6 @@
 import json
+import logging
+
 import boto3
 from botocore.exceptions import ClientError
 
@@ -9,6 +11,9 @@ dynamodb = boto3.resource('dynamodb')
 # Имя таблицы DynamoDB, которая служит key-value хранилищем
 TABLE_NAME = 'Models'
 table = dynamodb.Table(TABLE_NAME)
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def lambda_handler(event, _context):
@@ -21,7 +26,16 @@ def lambda_handler(event, _context):
         # Если тело запроса представлено строкой, парсим его как JSON
         if isinstance(body, str):
             body = json.loads(body)
+
+        normal_body = {
+            'input_body': 'Ok'
+        }
+        logger.info(json.dumps(normal_body))
     except Exception:  # pylint: disable=broad-exception-caught
+        error_buddy = {
+            'input_body': 'Error'
+        }
+        logger.info(json.dumps(error_buddy))
         return {
             'statusCode': 400,
             'body': json.dumps('Неверный формат тела запроса')
