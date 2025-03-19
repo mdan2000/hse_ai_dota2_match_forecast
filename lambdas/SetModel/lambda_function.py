@@ -27,7 +27,6 @@ def lambda_handler(event, _context):
         if isinstance(body, str):
             body = json.loads(body)
 
-
         normal_body = {
             'input_body': 'Ok'
         }
