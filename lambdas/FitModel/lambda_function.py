@@ -1,6 +1,7 @@
 import json
-import pandas as pd
 import pickle
+
+import pandas as pd
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 
 import boto3
@@ -11,7 +12,7 @@ s3 = boto3.client('s3')
 BUCKET_NAME = "dmyachin-new-models"
 
 
-def lambda_handler(event, context):
+def lambda_handler(event, _context):
     """
     Лямбда-функция для работы с моделями:
 
@@ -58,8 +59,10 @@ def lambda_handler(event, context):
                         "statusCode": 404,
                         "body": json.dumps({"error": f"Файл с именем {model_name} не найден."})
                     }
-                else:
-                    raise
+                return {
+                    "statusCode": 501,
+                    "body": json.dumps({"error": str(e)})
+                }
 
             # Десериализуем модель, если требуется
             model = pickle.loads(response['Body'].read())
@@ -89,6 +92,11 @@ def lambda_handler(event, context):
                 model = LogisticRegression(**model_params)
             elif model_type == "SGDClassifier":
                 model = SGDClassifier(**model_params)
+            else:
+                return {
+                    "statusCode": 502,
+                    "body": json.dumps({"error": "Strange model type input"})
+                }
 
             # Обучаем модель
         model.fit(X, y)
