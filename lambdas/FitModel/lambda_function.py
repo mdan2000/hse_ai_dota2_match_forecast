@@ -36,7 +36,7 @@ def lambda_handler(event, _context):  # pylint: disable=too-many-return-statemen
         body = event.get('body')
         # Если тело запроса представлено строкой, парсим его как JSON
         if isinstance(body, str):
-            body = json.loads(body)
+            event = json.loads(body)
     except Exception:  # pylint: disable=broad-exception-caught
         return {
             'statusCode': 400,
