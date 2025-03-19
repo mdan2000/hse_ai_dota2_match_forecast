@@ -45,6 +45,7 @@ jobs:
         run: |
           pip install flake8 pylint
           pip install pandas
+          pip install scikit-learn
 
       - name: Lint Python scripts
         run: |
