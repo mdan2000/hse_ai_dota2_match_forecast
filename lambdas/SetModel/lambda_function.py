@@ -19,6 +19,7 @@ logger.setLevel(logging.INFO)
 def lambda_handler(event, _context):
     """
     Lambda для установки основной модели для предсказания.
+        - Входной параметр model_name
     """
     # Ожидаем, что вызов происходит через API Gateway и данные передаются в теле запроса
     try:

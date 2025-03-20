@@ -12,7 +12,9 @@ s3 = boto3.client('s3')
 
 def lambda_handler(_event, _context):
     """
-    Lambda return models info
+    Лямбда функция для возвращения информации о модели
+        - Входных параметров не нужно
+        - На выходе возвращается список моделей с их параметрами
     """
     # Получаем список объектов в заданном префиксе
     response = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=PREFIX)
