@@ -1,0 +1,144 @@
+2025-03-18 10:56:40,768 - INFO - Логирование запущено
+2025-03-18 10:57:53,730 - INFO - Логирование запущено
+2025-03-18 11:08:03,506 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 11:08:11,037 - INFO - EDA выполнено
+2025-03-18 11:08:57,528 - INFO - Модель выбрана: Logistic Regression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs'}, стратегия обучения: Дообучение существующей модели
+2025-03-18 15:42:46,450 - INFO - Логирование запущено
+2025-03-18 15:43:12,190 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 15:43:26,897 - INFO - EDA выполнено
+2025-03-18 15:44:10,785 - INFO - EDA выполнено
+2025-03-18 15:44:28,508 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 15:44:28,558 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 15:44:28,733 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 15:45:18,508 - INFO - Пользователь выбрал эксперименты для сравнения: []
+2025-03-18 15:45:18,509 - INFO - Пользователь не выбрал эксперименты для сравнения
+2025-03-18 15:45:20,442 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl']
+2025-03-18 15:45:20,496 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 15:45:21,268 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl']
+2025-03-18 15:45:21,325 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 15:45:22,064 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\LogisticRegression_experiment_1.pkl']
+2025-03-18 15:45:22,161 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 15:45:22,531 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\RandomForestClassifier_experiment_7.pkl']
+2025-03-18 15:45:22,624 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 15:50:18,464 - INFO - Логирование запущено
+2025-03-18 15:50:18,491 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 15:50:18,526 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 15:50:51,642 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 15:50:51,751 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 15:50:51,799 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 15:56:34,961 - INFO - Логирование запущено
+2025-03-18 15:56:51,386 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 15:57:00,575 - INFO - Модель выбрана: Logistic Regression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs'}, стратегия обучения: Дообучение существующей модели
+2025-03-18 15:57:08,636 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 15:57:08,651 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 15:57:09,732 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 15:57:10,059 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 15:58:02,919 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 15:58:02,921 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 15:58:07,473 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_6.pkl
+2025-03-18 15:58:07,475 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_6.pkl
+2025-03-18 15:58:08,590 - INFO - Пользователь выбрал модель для инференса: models\GradientBoostingClassifier_experiment_9.pkl
+2025-03-18 15:58:08,592 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\GradientBoostingClassifier_experiment_9.pkl
+2025-03-18 15:58:24,118 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 15:58:24,177 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 16:34:11,544 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 16:35:21,454 - INFO - Логирование запущено
+2025-03-18 16:35:52,333 - INFO - Обучена модель: LogisticRegression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs', 'max_iter': 200}, стратегия: Дообучение существующей модели, Accuracy: 0.9979
+2025-03-18 16:36:31,537 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:36:31,553 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 16:36:31,566 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 16:36:31,613 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 16:36:45,658 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:36:45,660 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:36:48,046 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:02,085 - INFO - Логирование запущено
+2025-03-18 16:37:02,115 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:04,477 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:37:04,479 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:37:05,090 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:10,572 - INFO - Логирование запущено
+2025-03-18 16:37:10,595 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:19,679 - INFO - Логирование запущено
+2025-03-18 16:37:19,704 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:22,795 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:37:30,110 - INFO - Логирование запущено
+2025-03-18 16:37:30,130 - INFO - Пользователь выбрал эксперименты для сравнения: []
+2025-03-18 16:37:30,131 - INFO - Пользователь не выбрал эксперименты для сравнения
+2025-03-18 16:37:32,365 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl']
+2025-03-18 16:37:32,389 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:37:33,060 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl']
+2025-03-18 16:37:33,090 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:37:33,900 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl']
+2025-03-18 16:37:33,916 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:39:27,424 - INFO - Логирование запущено
+2025-03-18 16:39:27,440 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:40:32,452 - INFO - Логирование запущено
+2025-03-18 16:40:32,464 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl']
+2025-03-18 16:40:32,513 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:44:08,511 - INFO - Логирование запущено
+2025-03-18 16:44:24,824 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 16:44:51,559 - INFO - Обучена модель: LogisticRegression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs', 'max_iter': 200}, стратегия: Дообучение существующей модели, Accuracy: 0.9979
+2025-03-18 16:45:15,362 - INFO - Обучена модель: LogisticRegression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs', 'max_iter': 200}, стратегия: Дообучение существующей модели, Accuracy: 0.9979
+2025-03-18 16:46:38,543 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_20250318_163548.pkl', 'models\\LogisticRegression_20250318_163552.pkl', 'models\\LogisticRegression_20250318_164451.pkl', 'models\\LogisticRegression_20250318_164515.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:47:20,389 - INFO - Логирование запущено
+2025-03-18 16:47:20,406 - INFO - Пользователь выбрал эксперименты для сравнения: []
+2025-03-18 16:47:20,406 - INFO - Пользователь не выбрал эксперименты для сравнения
+2025-03-18 16:47:22,272 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl']
+2025-03-18 16:47:22,336 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:47:22,857 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl']
+2025-03-18 16:47:22,882 - INFO - Построена сравнительная кривая обучения для выбранных экспериментов
+2025-03-18 16:48:44,641 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:48:44,644 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:48:45,798 - INFO - Пользователь выбрал эксперименты для сравнения: []
+2025-03-18 16:48:45,799 - INFO - Пользователь не выбрал эксперименты для сравнения
+2025-03-18 16:49:13,515 - INFO - Логирование запущено
+2025-03-18 16:49:16,423 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:49:16,527 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 16:49:20,839 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:20,841 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:23,910 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:23,920 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 16:49:24,006 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 16:49:24,056 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 16:49:45,429 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:45,441 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 16:49:45,455 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 16:49:45,507 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 16:49:46,609 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:46,611 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:49:47,595 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:49:47,668 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 16:50:46,390 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 16:50:46,449 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 16:50:47,427 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:50:47,430 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:50:49,448 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:50:49,458 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 16:50:49,470 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 16:50:49,531 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 16:53:50,775 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:53:50,778 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 16:55:12,098 - INFO - Логирование запущено
+2025-03-18 16:55:28,042 - INFO - Логирование запущено
+2025-03-18 17:00:51,398 - INFO - Логирование запущено
+2025-03-18 17:00:54,556 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\GradientBoostingClassifier_experiment_10.pkl', 'models\\GradientBoostingClassifier_experiment_9.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 17:00:54,996 - INFO - Построена сравнительная кривая обучения (валидация) для выбранных экспериментов
+2025-03-18 17:00:57,626 - INFO - Пользователь выбрал модель для инференса: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 17:00:57,629 - ERROR - Отсутствует ключ 'pipeline' в эксперименте: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 17:00:59,526 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 17:00:59,542 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 17:00:59,589 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 17:00:59,642 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 17:03:11,397 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 17:05:19,021 - INFO - Обучена модель: LogisticRegression с параметрами {'penalty': 'l2', 'C': 1.0, 'solver': 'lbfgs', 'max_iter': 200}, стратегия: Обучение с нуля, Accuracy: 0.7044
+2025-03-18 17:11:16,174 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 17:11:16,180 - INFO - Отображены детали эксперимента ID 5
+2025-03-18 17:11:16,185 - INFO - Отображена матрица ошибок для эксперимента ID 5
+2025-03-18 17:11:16,210 - INFO - Построена кривая обучения для эксперимента ID 5
+2025-03-18 18:15:12,120 - WARNING - Нет доступных моделей для инференса в папке 'models'.
+2025-03-18 18:15:15,702 - WARNING - Нет файлов экспериментов в папке 'models'.
+2025-03-18 18:25:20,364 - INFO - Логирование запущено
+2025-03-18 18:30:37,296 - INFO - Датасет загружен: shape=(37601, 1308)
+2025-03-18 18:30:42,856 - INFO - Пользователь выбрал эксперимент: models\DecisionTreeClassifier_experiment_5.pkl
+2025-03-18 18:30:51,590 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
+2025-03-18 18:31:04,479 - INFO - Пользователь выбрал эксперименты для сравнения: ['models\\DecisionTreeClassifier_experiment_5.pkl', 'models\\DecisionTreeClassifier_experiment_6.pkl', 'models\\LogisticRegression_experiment_1.pkl', 'models\\LogisticRegression_experiment_2.pkl', 'models\\RandomForestClassifier_experiment_7.pkl', 'models\\RandomForestClassifier_experiment_8.pkl', 'models\\SGDClassifier_experiment_3.pkl', 'models\\SGDClassifier_experiment_4.pkl']
