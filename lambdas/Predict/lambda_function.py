@@ -10,7 +10,10 @@ import boto3
 
 def lambda_handler(event, _context):
     """
-    Lambda for make predict by given model or by setted model
+    Лямбда для получения предсказания на данных
+        - Входные параметры:
+            - model_name - используемая для predict модель
+            - data_path - путь к данным на s3 bucket
     """
     s3_bucket = "dmyachin-new-models"
     s3_client = boto3.client("s3")
