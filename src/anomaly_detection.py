@@ -6,12 +6,19 @@ import wandb
 from sklearn.ensemble import IsolationForest
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-def run_anomaly_detection_experiment(model_pipeline, X_train, y_train, X_test, y_test, experiment_id: int, contamination=0.05):
+def run_anomaly_detection_experiment(model_name: str, model_pipeline, X_train, y_train, X_test, y_test, experiment_id: int, contamination=0.05):
     """
     Проводит эксперимент по обнаружению и удалению аномалий с использованием IsolationForest,
     затем обучает модель на очищенных данных.
+    
+    Аргументы:
+      model_name: Имя модели (например, 'LogisticRegression' или 'SGDClassifier'), для формирования имени эксперимента.
+      model_pipeline: Пайплайн с предобработкой и классификатором.
+      X_train, y_train, X_test, y_test: Датасеты.
+      experiment_id: Идентификатор эксперимента.
+      contamination: Доля аномалий в данных.
     """
-    wandb.init(project="ml_experiments", name=f"AnomalyDetection_exp_{experiment_id}", reinit=True)
+    wandb.init(project="ml_experiments", name=f"AnomalyDetection_{model_name}_exp_{experiment_id}", reinit=True)
     
     # Обнаружение аномалий на обучающей выборке (работает с полными данными)
     iso_forest = IsolationForest(contamination=contamination, random_state=42)
@@ -39,7 +46,7 @@ def run_anomaly_detection_experiment(model_pipeline, X_train, y_train, X_test, y
     })
     
     experiment = {
-        "model": "AnomalyDetection_" + model_pipeline.named_steps['classifier'].__class__.__name__,
+        "model": "AnomalyDetection_" + model_name,
         "pipeline": model_pipeline,
         "test_score": acc,
         "confusion_matrix": conf_matrix,

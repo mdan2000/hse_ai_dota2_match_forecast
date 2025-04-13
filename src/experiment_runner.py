@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.decomposition import PCA
+from sklearn.decomposition import TruncatedSVD  # Используем TruncatedSVD вместо PCA
 
 import wandb
 
@@ -42,6 +42,7 @@ def main():
         ])
     ]
     
+    # 6 экспериментов без редукции размерности
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
@@ -53,27 +54,33 @@ def main():
             run_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
             
+    # 6 экспериментов с редукцией размерности (используем TruncatedSVD вместо PCA, но имя шага оставляем "pca")
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
             preprocessor = build_preprocessor(numeric_features, categorical_features)
             full_pipeline = Pipeline(steps=[
                 ('preprocessor', preprocessor),
-                ('pca', PCA(n_components=10)),
+                ('pca', TruncatedSVD(n_components=10)),
                 ('classifier', classifier)
             ])
             run_experiment(model_name + "_PCA", full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
-    
-    classifier = LogisticRegression(C=1.0, penalty="l2", solver="lbfgs", max_iter=200)
-    preprocessor = build_preprocessor(numeric_features, categorical_features)
-    full_pipeline = Pipeline(steps=[
-        ('preprocessor', preprocessor),
-        ('classifier', classifier)
-    ])
-    run_anomaly_detection_experiment(full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=0.05)
-    experiment_counter += 1
-    
+
+    # 6 экспериментов по обнаружению аномалий (для каждого набора параметров)
+    for model_name, model_class, params_list in models_experiments:
+        for params in params_list:
+            classifier = model_class(**params)
+            preprocessor = build_preprocessor(numeric_features, categorical_features)
+            full_pipeline = Pipeline(steps=[
+                ('preprocessor', preprocessor),
+                ('classifier', classifier)
+            ])
+            # Передаём model_name для формирования имени эксперимента
+            run_anomaly_detection_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=0.05)
+            experiment_counter += 1
+
+    # Эксперимент TPOT
     run_tpot_experiment(X_train, y_train, X_test, y_test, experiment_counter)
     experiment_counter += 1
 
