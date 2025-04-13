@@ -27,36 +27,29 @@ def main():
     
     experiment_counter = 1  # Счетчик экспериментов
     
+    # Обновленный список классических моделей с 4 вариантами гиперпараметров для каждой
     models_experiments = [
         ("LogisticRegression", LogisticRegression, [
             {"C": 1.0, "penalty": "l2", "solver": "lbfgs", "max_iter": 200},
-            {"C": 0.8, "penalty": "l2", "solver": "lbfgs", "max_iter": 200}
+            {"C": 0.8, "penalty": "l2", "solver": "lbfgs", "max_iter": 200},
+            {"C": 1.5, "penalty": "l2", "solver": "lbfgs", "max_iter": 300},
+            {"C": 0.5, "penalty": "l2", "solver": "lbfgs", "max_iter": 200}
         ]),
         ("SGDClassifier", SGDClassifier, [
             {"loss": "hinge", "max_iter": 1000, "tol": 1e-3},
-            {"loss": "log", "max_iter": 1000, "tol": 1e-3}
+            {"loss": "log", "max_iter": 1000, "tol": 1e-3},
+            {"loss": "modified_huber", "max_iter": 1000, "tol": 1e-3},
+            {"loss": "squared_hinge", "max_iter": 1000, "tol": 1e-3}
         ]),
         ("DecisionTreeClassifier", DecisionTreeClassifier, [
             {"max_depth": 5, "criterion": "gini"},
-            {"max_depth": 7, "criterion": "gini"}
+            {"max_depth": 7, "criterion": "gini"},
+            {"max_depth": 5, "criterion": "entropy"},
+            {"max_depth": 7, "criterion": "entropy"}
         ])
     ]
     
-    # --- БЛОК АНОМАЛЬНОГО ОБНАРУЖЕНИЯ (запускаем его первым) ---
-    # Для каждого набора параметров запускаем два эксперимента с contamination=0.05 и 0.10 (в сумме 12)
-    for model_name, model_class, params_list in models_experiments:
-        for params in params_list:
-            for contamination in [0.05, 0.10]:
-                classifier = model_class(**params)
-                preprocessor = build_preprocessor(numeric_features, categorical_features)
-                full_pipeline = Pipeline(steps=[
-                    ('preprocessor', preprocessor),
-                    ('classifier', classifier)
-                ])
-                run_anomaly_detection_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=contamination)
-                experiment_counter += 1
-
-    # --- Эксперименты без редукции размерности (6 экспериментов) ---
+    # --- Блок КЛАССИЧЕСКИХ ЭКСПЕРИМЕНТОВ (без редукции размерности) ---
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
@@ -68,7 +61,7 @@ def main():
             run_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
             
-    # --- Эксперименты с редукцией размерности (6 экспериментов) ---
+    # --- Блок ЭКСПЕРИМЕНТОВ с РЕДУКЦИЕЙ (с использованием TruncatedSVD, но имя шага оставляем "pca") ---
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
@@ -81,7 +74,19 @@ def main():
             run_experiment(model_name + "_PCA", full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
 
-    # --- Эксперимент TPOT ---
+    # --- Блок ЭКСПЕРИМЕНТОВ по ОБНАРУЖЕНИЮ АНОМАЛИЙ ---
+    for model_name, model_class, params_list in models_experiments:
+        for params in params_list:
+            classifier = model_class(**params)
+            preprocessor = build_preprocessor(numeric_features, categorical_features)
+            full_pipeline = Pipeline(steps=[
+                ('preprocessor', preprocessor),
+                ('classifier', classifier)
+            ])
+            run_anomaly_detection_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=0.05)
+            experiment_counter += 1
+
+    # --- ЭКСПЕРИМЕНТ TPOT ---
     run_tpot_experiment(X_train, y_train, X_test, y_test, experiment_counter)
     experiment_counter += 1
 
