@@ -20,8 +20,9 @@ def run_anomaly_detection_experiment(model_name: str, model_pipeline, X_train, y
     """
     wandb.init(project="ml_experiments", name=f"AnomalyDetection_{model_name}_exp_{experiment_id}", reinit=True)
     
-    # Применяем этап предобработки, чтобы все признаки были числовыми
-    X_train_processed = model_pipeline.named_steps['preprocessor'].transform(X_train)
+    # Обучаем предобработчик и сразу преобразуем X_train,
+    # чтобы убедиться, что данные приведены к числовому виду.
+    X_train_processed = model_pipeline.named_steps['preprocessor'].fit_transform(X_train)
     
     iso_forest = IsolationForest(contamination=contamination, random_state=42)
     anomaly_preds = iso_forest.fit_predict(X_train_processed)
