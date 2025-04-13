@@ -42,7 +42,21 @@ def main():
         ])
     ]
     
-    # 6 экспериментов без редукции размерности
+    # --- БЛОК АНОМАЛЬНОГО ОБНАРУЖЕНИЯ (запускаем его первым) ---
+    # Для каждого набора параметров запускаем два эксперимента с contamination=0.05 и 0.10 (в сумме 12)
+    for model_name, model_class, params_list in models_experiments:
+        for params in params_list:
+            for contamination in [0.05, 0.10]:
+                classifier = model_class(**params)
+                preprocessor = build_preprocessor(numeric_features, categorical_features)
+                full_pipeline = Pipeline(steps=[
+                    ('preprocessor', preprocessor),
+                    ('classifier', classifier)
+                ])
+                run_anomaly_detection_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=contamination)
+                experiment_counter += 1
+
+    # --- Эксперименты без редукции размерности (6 экспериментов) ---
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
@@ -54,7 +68,7 @@ def main():
             run_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
             
-    # 6 экспериментов с редукцией размерности (используем TruncatedSVD вместо PCA, но имя шага оставляем "pca")
+    # --- Эксперименты с редукцией размерности (6 экспериментов) ---
     for model_name, model_class, params_list in models_experiments:
         for params in params_list:
             classifier = model_class(**params)
@@ -67,20 +81,7 @@ def main():
             run_experiment(model_name + "_PCA", full_pipeline, X_train, y_train, X_test, y_test, experiment_counter)
             experiment_counter += 1
 
-    # 6 экспериментов по обнаружению аномалий (для каждого набора параметров)
-    for model_name, model_class, params_list in models_experiments:
-        for params in params_list:
-            classifier = model_class(**params)
-            preprocessor = build_preprocessor(numeric_features, categorical_features)
-            full_pipeline = Pipeline(steps=[
-                ('preprocessor', preprocessor),
-                ('classifier', classifier)
-            ])
-            # Передаём model_name для формирования имени эксперимента
-            run_anomaly_detection_experiment(model_name, full_pipeline, X_train, y_train, X_test, y_test, experiment_counter, contamination=0.05)
-            experiment_counter += 1
-
-    # Эксперимент TPOT
+    # --- Эксперимент TPOT ---
     run_tpot_experiment(X_train, y_train, X_test, y_test, experiment_counter)
     experiment_counter += 1
 

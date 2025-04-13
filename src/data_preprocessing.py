@@ -49,7 +49,8 @@ def build_preprocessor(numeric_features, categorical_features):
     
     categorical_pipeline = Pipeline(steps=[
         ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
-        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+        # Задаем sparse=False, чтобы вернуть плотную матрицу
+        ('onehot', OneHotEncoder(handle_unknown='ignore', sparse=False))
     ])
     
     preprocessor = ColumnTransformer(
